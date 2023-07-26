@@ -9,13 +9,14 @@ try {
     const search = issueNumberInput ? issueNumberInput : github.context.ref;
     const statusMatch = statusMatchInput ? statusMatchInput : 'Under Code Review';
 
-    console.log(`Searching "${search}" for Jira issue number.`)
-
-    if (!issueNumberInput) {
+    
+    if (issueNumberInput) {
+        console.log(`Using provided Jira issue number: ${issueNumberInput}`)
+        const issueNumber = issueNumberInput;
+    } else {
+        console.log(`Searching "${search}" for Jira issue number.`)
         const match = search.match(/([A-Za-z]{2,4}-\d{1,})/g)
         const issueNumber = match ? match[0] : null
-    } else {
-        const issueNumber = issueNumberInput;
     }
 
     if (!issueNumber) {
