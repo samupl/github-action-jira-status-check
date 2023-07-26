@@ -9,21 +9,22 @@ try {
     const search = issueNumberInput ? issueNumberInput : github.context.ref;
     const statusMatch = statusMatchInput ? statusMatchInput : 'Under Code Review';
 
-    
+    let issueNumber;
     if (issueNumberInput) {
         console.log(`Using provided Jira issue number: ${issueNumberInput}`)
-        const issueNumber = issueNumberInput;
+        issueNumber = issueNumberInput;
     } else {
         console.log(`Searching "${search}" for Jira issue number.`)
         const match = search.match(/([A-Za-z]{2,4}-\d{1,})/g)
-        const issueNumber = match ? match[0] : null
+        issueNumber = match ? match[0] : null
+        console.log(`Issue number found: ${issueNumber}`)
     }
 
     if (!issueNumber) {
         return core.setFailed('No issue number found. Assuming not ready.');
     }
 
-    console.log(`Issue number found: ${issueNumber}`)
+    
     core.setOutput("issueNumber", issueNumber);
 
     let jira = new JiraApi({
