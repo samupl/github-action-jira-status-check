@@ -10,6 +10,8 @@ try {
     const statusMatch = statusMatchInput ? statusMatchInput : 'Under Code Review';
 
     let issueNumber;
+    console.log({issueNumberInput});
+    console.log('xxxxx');
     if (issueNumberInput) {
         console.log(`Using provided Jira issue number: ${issueNumberInput}`)
         issueNumber = issueNumberInput;
