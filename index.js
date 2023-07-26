@@ -11,8 +11,12 @@ try {
 
     console.log(`Searching "${search}" for Jira issue number.`)
 
-    const match = search.match(/([A-Za-z]{2,4}-\d{1,})/g)
-    const issueNumber = match ? match[0] : null
+    if (!issueNumberInput) {
+        const match = search.match(/([A-Za-z]{2,4}-\d{1,})/g)
+        const issueNumber = match ? match[0] : null
+    } else {
+        const issueNumber = issueNumberInput;
+    }
 
     if (!issueNumber) {
         return core.setFailed('No issue number found. Assuming not ready.');
